@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 - Студент: [Игорь Ткаченко](https://up.htmlacademy.ru/javascript-individual/2/user/1399877).
-- Наставник: [Павел Ившин](https://htmlacademy.ru/profile/id818775).
+- Наставник: [Владимир Вавщик](https://htmlacademy.ru/profile/id1610171).
 
 ---
 
