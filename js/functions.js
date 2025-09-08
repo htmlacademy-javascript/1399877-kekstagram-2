@@ -33,5 +33,3 @@ const isTimeSlotAvailable = (startDay, endDay, startMeeting, durationMeeting) =>
 
   return true;
 };
-
-console.log(isTimeSlotAvailable('9:00','18:0','17:5',55));

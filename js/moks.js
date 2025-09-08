@@ -31,7 +31,7 @@ const generatePhoto = (getPhotoId, getCommentId) => {
   };
 };
 
-const createPhotoDescriptions = () => {
+const createPhotos = () => {
   const getPhotoId = createIdGenerator();
   const getCommentId = createIdGenerator();
   return Array.from({ length: COUNT_PHOTOS }, () =>
@@ -43,5 +43,5 @@ export {
   generateComment,
   generateComments,
   generatePhoto,
-  createPhotoDescriptions
+  createPhotos
 };
