@@ -31,17 +31,10 @@ const generatePhoto = (getPhotoId, getCommentId) => {
   };
 };
 
-const createPhotos = () => {
+export const createPhotos = () => {
   const getPhotoId = createIdGenerator();
   const getCommentId = createIdGenerator();
   return Array.from({ length: COUNT_PHOTOS }, () =>
     generatePhoto(getPhotoId, getCommentId)
   );
-};
-
-export {
-  generateComment,
-  generateComments,
-  generatePhoto,
-  createPhotos
 };
