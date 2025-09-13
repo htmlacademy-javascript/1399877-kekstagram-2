@@ -1,9 +1,9 @@
-const COUNT_PHOTOS = 25;
-const COUNT_AVATAR = { min: 1, max: 6 };
-const COUNT_LIKES = { min: 15, max: 200 };
-const COUNT_COMMENTS = { min: 0, max: 30 };
+export const COUNT_PHOTOS = 25;
+export const COUNT_AVATAR = { min: 1, max: 6 };
+export const COUNT_LIKES = { min: 15, max: 200 };
+export const COUNT_COMMENTS = { min: 0, max: 30 };
 
-const MESSAGES = [
+export const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -12,7 +12,7 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const AUTHORS = [
+export const AUTHORS = [
   'Алексей Смирнов',
   'Мария Иванова',
   'Иван Кузнецов',
@@ -24,7 +24,7 @@ const AUTHORS = [
   'Никита Павлов',
 ];
 
-const DESCRIPTIONS = [
+export const DESCRIPTIONS = [
   'Закат над заливом, отражение в воде просто волшебное',
   'Уютное кафе с пледом и чашкой кофе на фоне серого неба',
   'Заросшая тропинка в сосновом лесу, словно из сказки',
@@ -35,13 +35,3 @@ const DESCRIPTIONS = [
   'Уличный музыкант играет на саксофоне, и всё вокруг будто замирает',
   'Листья клена на брусчатке — осень в самом красивом проявлении',
 ];
-
-export {
-  COUNT_PHOTOS,
-  COUNT_AVATAR,
-  COUNT_LIKES,
-  COUNT_COMMENTS,
-  MESSAGES,
-  AUTHORS,
-  DESCRIPTIONS
-};
