@@ -1,56 +1,32 @@
-import { picturesList } from './render-pictures-list';
-import { pictureModal, renderPictureModal } from './render-picture-modal';
-import { isEnterKey, isEscapeKey } from './utils';
+import { picturesList } from './render-pictures/render-pictures-list';
+import { pictureModal, renderPictureModal } from './render-pictures/render-picture-modal';
+import * as handleModal from './render-pictures/handle-picture-modal';
 
-const closeButtonModal = pictureModal.querySelector('.big-picture__cancel')
+export const closeButtonModal = pictureModal.querySelector('.big-picture__cancel');
+let modalOpen = false;
 
-const showPictureModal = (element) => {
-  renderPictureModal(element)
+handleModal.toggleEventModal(modalOpen);
 
-  pictureModal.classList.remove('hidden');
-  pictureModal.querySelector('.social__comment-count').classList.add('hidden');
-  document.querySelector('body').classList.add('modal-open');
+export const showPictureModal = (element) => {
+  const elementList = element.closest('.picture');
 
-  closeButtonModal.addEventListener('click', onCloseClick);
-  document.addEventListener('keydown', closePicturesListKeydown);
-
-  picturesList.removeEventListener('click', onPicturesListClick);
-};
-
-const hidePictoreModal = () => {
-  pictureModal.classList.add('hidden');
-
-  pictureModal.querySelector('.social__comment-count').classList.remove('hidden');
-  document.querySelector('body').classList.remove('modal-open');
-
-  document.removeEventListener('keydown', closePicturesListKeydown);
-
-  document.addEventListener('keydown', onPicturesListKeydown);
-  picturesList.addEventListener('click', onPicturesListClick);
-};
-
-const onCloseClick = (evt) => {
-  evt.preventDefault();
-  hidePictoreModal();
-};
-
-const onPicturesListClick = (evt) => {
-  evt.preventDefault();
-
-  showPictureModal(evt.target.parentNode);
-};
-
-const onPicturesListKeydown = (evt) => {
-  if (isEnterKey(evt)){
-    showPictureModal(evt.target);
+  if (!elementList) {
+    return;
   }
+
+  picturesList.removeEventListener('click', handleModal.handleClickPicturesList);
+  document.removeEventListener('keydown', handleModal.handleOpenModalKeydown);
+
+  renderPictureModal(elementList);
+
+  modalOpen = true;
+  handleModal.toggleEventModal(modalOpen);
 };
 
-const closePicturesListKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    hidePictoreModal();
-  }
-}
+export const hidePictureModal = () => {
+  document.removeEventListener('keydown', handleModal.handleCloseKeydown);
+  closeButtonModal.removeEventListener('click', handleModal.handleClickPicturesList);
 
-picturesList.addEventListener('click', onPicturesListClick);
-document.addEventListener('keydown', onPicturesListKeydown);
+  modalOpen = false;
+  handleModal.toggleEventModal(modalOpen);
+};

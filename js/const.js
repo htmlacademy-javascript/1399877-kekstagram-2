@@ -2,6 +2,8 @@ export const COUNT_PHOTOS = 25;
 export const COUNT_AVATAR = { min: 1, max: 6 };
 export const COUNT_LIKES = { min: 15, max: 200 };
 export const COUNT_COMMENTS = { min: 0, max: 30 };
+export const SHOW_COMMETS_COUNT = 5;
+export const STEP = 5;
 
 export const MESSAGES = [
   'Всё отлично!',
