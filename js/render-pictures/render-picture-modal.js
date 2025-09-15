@@ -21,4 +21,4 @@ export const renderPictureModal = (item) => {
   pictureModal.querySelector('.social__caption').textContent = descriptionPicture;
 
   findItemPicturesList(dataPictures, item.dataset.itemId);
-}
+};

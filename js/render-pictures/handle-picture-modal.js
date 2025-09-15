@@ -16,7 +16,7 @@ export const handleCloseClick = (evt) => {
 export const handleOpenModalKeydown = (evt) => {
   if (isEnterKey(evt)) {
     showPictureModal(evt.target);
-  };
+  }
 };
 
 const handleCloseModalKeydown = (evt) => {
@@ -43,6 +43,4 @@ export const toggleEventModal = (isOpen) => {
 
   }
 };
-
-
 

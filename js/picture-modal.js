@@ -2,16 +2,18 @@ import { picturesList } from './render-pictures/render-pictures-list';
 import { pictureModal, renderPictureModal } from './render-pictures/render-picture-modal';
 import * as handleModal from './render-pictures/handle-picture-modal';
 
-export const closeButtonModal = pictureModal.querySelector('.big-picture__cancel')
+export const closeButtonModal = pictureModal.querySelector('.big-picture__cancel');
 let modalOpen = false;
+
 handleModal.toggleEventModal(modalOpen);
 
 export const showPictureModal = (element) => {
   const elementList = element.closest('.picture');
 
   if (!elementList) {
-    return
+    return;
   }
+
   picturesList.removeEventListener('click', handleModal.handleClickPicturesList);
   document.removeEventListener('keydown', handleModal.handleOpenModalKeydown);
 
