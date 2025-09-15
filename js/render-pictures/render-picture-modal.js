@@ -1,5 +1,5 @@
 import { dataPictures } from './render-pictures-list';
-import { renderComments } from './render-comments-list';
+import { renderComments } from './render-comments/render-comments-list';
 
 export const pictureModal = document.querySelector('.big-picture');
 

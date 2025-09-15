@@ -3,6 +3,7 @@ import {MESSAGES, COUNT_AVATAR, AUTHORS, COUNT_COMMENTS, DESCRIPTIONS, COUNT_LIK
 
 const generateComment = (getId) => {
   const sentencesCount = getRandomInteger(1, 2);
+
   const message = Array.from({ length: sentencesCount }, () =>
     MESSAGES[getRandomInteger(0, MESSAGES.length - 1)]
   ).join(' ');
@@ -22,6 +23,7 @@ const generateComments = (getId) =>
 
 const generatePhoto = (getPhotoId, getCommentId) => {
   const id = getPhotoId();
+
   return {
     id,
     url: `photos/${id}.jpg`,
@@ -34,6 +36,7 @@ const generatePhoto = (getPhotoId, getCommentId) => {
 export const createPhotos = () => {
   const getPhotoId = createIdGenerator();
   const getCommentId = createIdGenerator();
+
   return Array.from({ length: COUNT_PHOTOS }, () =>
     generatePhoto(getPhotoId, getCommentId)
   );
