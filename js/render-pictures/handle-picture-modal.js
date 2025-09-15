@@ -32,7 +32,6 @@ export const toggleEventModal = (isOpen) => {
     closeButtonModal.addEventListener('click', handleCloseClick);
 
     pictureModal.classList.remove('hidden');
-    pictureModal.querySelector('.social__comment-count').classList.add('hidden');
     document.querySelector('body').classList.add('modal-open');
 
   } else {
@@ -40,7 +39,6 @@ export const toggleEventModal = (isOpen) => {
     picturesList.addEventListener('click', handleClickPicturesList);
 
     pictureModal.classList.add('hidden');
-    pictureModal.querySelector('.social__comment-count').classList.remove('hidden');
     document.querySelector('body').classList.remove('modal-open');
 
   }

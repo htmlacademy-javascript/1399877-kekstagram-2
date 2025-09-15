@@ -1,5 +1,5 @@
 import { dataPictures } from './render-pictures-list';
-import { renderComments } from './render-comments/render-comments-list';
+import { findItemPicturesList } from './render-comments/render-comments-list';
 
 export const pictureModal = document.querySelector('.big-picture');
 
@@ -20,5 +20,5 @@ export const renderPictureModal = (item) => {
   pictureModal.querySelector('.social__comment-total-count').textContent = commentsCount;
   pictureModal.querySelector('.social__caption').textContent = descriptionPicture;
 
-  renderComments(dataPictures, item.dataset.itemId);
+  findItemPicturesList(dataPictures, item.dataset.itemId);
 }

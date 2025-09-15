@@ -7,12 +7,15 @@ let modalOpen = false;
 handleModal.toggleEventModal(modalOpen);
 
 export const showPictureModal = (element) => {
+  const elementList = element.closest('.picture');
+
+  if (!elementList) {
+    return
+  }
   picturesList.removeEventListener('click', handleModal.handleClickPicturesList);
   document.removeEventListener('keydown', handleModal.handleOpenModalKeydown);
 
-  const elementList = element.closest('.picture');
-
-  renderPictureModal(elementList)
+  renderPictureModal(elementList);
 
   modalOpen = true;
   handleModal.toggleEventModal(modalOpen);
