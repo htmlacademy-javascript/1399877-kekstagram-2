@@ -4,6 +4,7 @@ export const COUNT_LIKES = { min: 15, max: 200 };
 export const COUNT_COMMENTS = { min: 0, max: 30 };
 export const SHOW_COMMETS_COUNT = 5;
 export const STEP = 5;
+export const MAX_HASHTAGS = 5;
 
 export const MESSAGES = [
   'Всё отлично!',
@@ -37,3 +38,5 @@ export const DESCRIPTIONS = [
   'Уличный музыкант играет на саксофоне, и всё вокруг будто замирает',
   'Листья клена на брусчатке — осень в самом красивом проявлении',
 ];
+
+export const HASHTAG_VALIDATION = /^#[\p{L}\p{Nd}]{1,19}$/u;
