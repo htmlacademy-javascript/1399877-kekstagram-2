@@ -4,7 +4,6 @@ import { closeButtonModal, showPictureModal, hidePictureModal } from '../picture
 import { isEnterKey, isEscapeKey } from '../utils';
 
 export const handleClickPicturesList = (evt) => {
-  evt.preventDefault();
   showPictureModal(evt.target);
 };
 
