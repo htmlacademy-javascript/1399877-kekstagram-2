@@ -5,6 +5,9 @@ export const COUNT_COMMENTS = { min: 0, max: 30 };
 export const SHOW_COMMETS_COUNT = 5;
 export const STEP = 5;
 export const MAX_HASHTAGS = 5;
+export const SCALE_STEP = 25;
+export const MIN_SCALE = 25;
+export const MAX_SCALE = 100;
 
 export const MESSAGES = [
   'Всё отлично!',
