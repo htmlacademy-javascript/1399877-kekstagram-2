@@ -9,6 +9,7 @@ export const SCALE_STEP = 25;
 export const MIN_SCALE = 25;
 export const MAX_SCALE = 100;
 export const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+export const RANDOM_PICTURES_COUNT = 10;
 
 export const MESSAGES = [
   'Всё отлично!',

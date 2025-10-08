@@ -1,9 +1,9 @@
 import { getData } from '../api';
+import { initFilters } from './filters';
 
 export const picturesList = document.querySelector('.pictures');
 
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const pictureListFragment = document.createDocumentFragment();
 
 const showError = (id) => {
   const template = document.querySelector(id).content.querySelector('.data-error');
@@ -14,8 +14,12 @@ const showError = (id) => {
 
 export const dataPictures = getData();
 
-dataPictures.then((data) => {
-  data.forEach(({ url, description, likes, comments, id }) => {
+export const renderPictures = (pictures) => {
+  picturesList.innerHTML = '';
+
+  const fragment = document.createDocumentFragment();
+
+  pictures.forEach(({url, description, likes, comments, id}) => {
     const pictureItem = pictureTemplate.cloneNode(true);
     const pictureImg = pictureItem.querySelector('.picture__img');
 
@@ -25,8 +29,14 @@ dataPictures.then((data) => {
     pictureItem.querySelector('.picture__comments').textContent = comments.length;
     pictureItem.dataset.itemId = id;
 
-    pictureListFragment.append(pictureItem);
+    fragment.append(pictureItem);
   });
+  picturesList.append(fragment);
+};
 
-  picturesList.append(pictureListFragment);
-}).catch(() => showError('#data-error'));
+dataPictures.then((data) => {
+  renderPictures(data);
+  document.querySelector('.img-filters').classList.remove('img-filters--inactive');
+  initFilters(data);
+})
+  .catch(() => showError('#data-error'));
