@@ -51,15 +51,10 @@ const isOverlayOpen = () => !uploadImage.classList.contains('hidden');
 const showMessage = (templateId) => {
   const template = document.querySelector(templateId);
 
-  if (!template) {
-    console.error(`Шаблон ${templateId} не найден`);
-    return;
-  }
-
   const element = template.content.firstElementChild.cloneNode(true);
   document.body.append(element);
 
-  const controller = new AbortController();
+  controller = new AbortController();
   const { signal } = controller;
 
   const removeMessage = () => {
@@ -207,16 +202,15 @@ uploadForm.addEventListener('submit', (evt) => {
   blockSubmitButton();
 
   sendData(formData)
-  .then(() => {
-    showMessage('#success');
-    uploadForm.reset();
-    closeUploadOverlay();
-  })
-  .catch(() => {
-    showMessage('#error');
-  })
-  .finally(() => {
-    unblockSubmitButton();
-  });
-
+    .then(() => {
+      showMessage('#success');
+      uploadForm.reset();
+      closeUploadOverlay();
+    })
+    .catch(() => {
+      showMessage('#error');
+    })
+    .finally(() => {
+      unblockSubmitButton();
+    });
 });
