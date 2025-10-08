@@ -1,4 +1,4 @@
-import { picturesList } from './render-pictures/render-pictures-list';
+import { picturesList, dataPictures } from './render-pictures/render-pictures-list';
 import { pictureModal, renderPictureModal } from './render-pictures/render-picture-modal';
 import * as handleModal from './render-pictures/handle-picture-modal';
 
@@ -17,7 +17,10 @@ export const showPictureModal = (element) => {
   picturesList.removeEventListener('click', handleModal.handleClickPicturesList);
   document.removeEventListener('keydown', handleModal.handleOpenModalKeydown);
 
-  renderPictureModal(elementList);
+  dataPictures.then((data) => {
+    renderPictureModal(elementList, data);
+  });
+
 
   modalOpen = true;
   handleModal.toggleEventModal(modalOpen);
