@@ -1,16 +1,15 @@
-import { dataPictures } from './render-pictures-list';
 import { findItemPicturesList } from './render-comments/render-comments-list';
 
 export const pictureModal = document.querySelector('.big-picture');
 
-export const renderPictureModal = (item) => {
+export const renderPictureModal = (item, picturesData) => {
   const image = item.querySelector('.picture__img');
   const commentsCount = item.querySelector('.picture__comments').textContent;
   const likes = item.querySelector('.picture__likes').textContent;
   let commentShow = 5;
   const descriptionPicture = image.alt;
 
-  if(commentsCount < commentShow) {
+  if (commentsCount < commentShow) {
     commentShow = commentsCount;
   }
 
@@ -20,5 +19,5 @@ export const renderPictureModal = (item) => {
   pictureModal.querySelector('.social__comment-total-count').textContent = commentsCount;
   pictureModal.querySelector('.social__caption').textContent = descriptionPicture;
 
-  findItemPicturesList(dataPictures, item.dataset.itemId);
+  findItemPicturesList(picturesData, item.dataset.itemId);
 };
