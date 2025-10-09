@@ -1,9 +1,9 @@
 import {isEscapeKey, getFocusableElements, trapFocus} from '../utils';
 import { isValidHashtags, isWithinHashtagsLimit, isUniqueValue, isValidDescription } from './validator-form';
-import { handleScaleUploadImage } from './scale';
 import { initEffects } from './effects.js';
 import { sendData } from '../api.js';
 import { FILE_TYPES } from '../const.js';
+import { initScale } from './init-scale.js';
 
 export const uploadForm = document.querySelector('#upload-select-image');
 const uploadInput = uploadForm?.querySelector('#upload-file');
@@ -16,7 +16,6 @@ const previewImage = uploadForm.querySelector('.img-upload__preview img');
 
 const buttonCancelUpload = uploadForm.querySelector('.img-upload__cancel');
 const submitButton = uploadForm.querySelector('#upload-submit');
-
 
 const scaleSmallerButton = uploadForm.querySelector('.scale__control--smaller');
 const scaleBiggerButton = uploadForm.querySelector('.scale__control--bigger');
@@ -44,32 +43,32 @@ pristine.addValidator(uploadInputHashtag, isWithinHashtagsLimit, 'превыше
 pristine.addValidator(uploadInputHashtag, isValidHashtags, 'введён невалидный хэштег', 2, true);
 pristine.addValidator(uploadInputHashtag, isUniqueValue, 'хэштеги повторяются', 1, true);
 
-let controller = null;
+let controllerForm = null;
+let controllerMessage = null;
 
 const isOverlayOpen = () => !uploadImage.classList.contains('hidden');
 
 const showMessage = (templateId) => {
   const template = document.querySelector(templateId);
-
   const element = template.content.firstElementChild.cloneNode(true);
   document.body.append(element);
 
-  controller = new AbortController();
-  const { signal } = controller;
+  controllerMessage = new AbortController();
+  const { signal } = controllerMessage;
 
   const removeMessage = () => {
     element.remove();
-    controller.abort();
+    controllerMessage.abort();
   };
 
-  const onEsc = (evt) => {
+  const handleEsc = (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
       removeMessage();
     }
   };
 
-  const onClickOutside = (evt) => {
+  const handleClickOutside = (evt) => {
     if (!evt.target.closest(`${templateId.replace('#', '.')}`)) {
       removeMessage();
     }
@@ -80,8 +79,8 @@ const showMessage = (templateId) => {
     button.addEventListener('click', removeMessage, { signal });
   }
 
-  document.addEventListener('keydown', onEsc, { signal });
-  document.addEventListener('click', onClickOutside, { signal });
+  document.addEventListener('keydown', handleEsc, { signal });
+  document.addEventListener('click', handleClickOutside, { signal });
 };
 
 const closeUploadOverlay = () => {
@@ -93,48 +92,32 @@ const closeUploadOverlay = () => {
   uploadInputDescription.value = '';
 
   scaleValueField.value = '100%';
+  scaleValueField.setAttribute('value', '100%');
   previewImage.style.transform = 'scale(1)';
   previewImage.className = '';
   previewImage.style.filter = 'none';
 
-  controller?.abort();
-  controller = null;
-};
+  pristine.reset();
 
+  controllerForm?.abort();
+  controllerForm = null;
+};
 
 const endUploadFormSession = (evt) => {
   evt.preventDefault();
-
   closeUploadOverlay();
 };
 
 const openModalUploadForm = (signal) => {
-  scaleValueField.value = '100%';
-  previewImage.style.transform = 'scale(1)';
-
-  scaleSmallerButton.addEventListener(
-    'click',
-    () => handleScaleUploadImage(true, false, scaleValueField, previewImage),
-    { signal }
-  );
-
-  scaleBiggerButton.addEventListener(
-    'click',
-    () => handleScaleUploadImage(false, true, scaleValueField, previewImage),
-    { signal }
-  );
-
-  initEffects(previewImage, signal);
-
   document.body.classList.add('modal-open');
   uploadImage.classList.remove('hidden');
 
-  const modalElements = getFocusableElements(uploadForm);
+  const smaller = uploadForm.querySelector('.scale__control--smaller');
+  const bigger = uploadForm.querySelector('.scale__control--bigger');
+  const valueField = uploadForm.querySelector('.scale__control--value');
+  const preview = uploadForm.querySelector('.img-upload__preview img');
 
-  document.addEventListener('keydown', (evt) => {
-    trapFocus(evt, modalElements);
-  }, { signal });
-
+  initEffects(preview, signal);
 };
 
 const startUploadFormSession = () => {
@@ -146,9 +129,9 @@ const startUploadFormSession = () => {
     return;
   }
 
-  controller?.abort();
-  controller = new AbortController();
-  const { signal } = controller;
+  controllerForm?.abort();
+  controllerForm = new AbortController();
+  const { signal } = controllerForm;
 
   openModalUploadForm(signal);
 
@@ -162,7 +145,6 @@ const startUploadFormSession = () => {
     }
 
     evt.preventDefault();
-
     closeUploadOverlay();
   }, { signal });
 };
@@ -178,9 +160,9 @@ const bindOpenTrigger = () => {
       const reader = new FileReader();
       reader.addEventListener('load', () => {
         previewImage.src = reader.result;
+        setTimeout(() => startUploadFormSession(), 0);
       });
       reader.readAsDataURL(file);
-      startUploadFormSession();
     } else {
       showMessage('#file-error');
       uploadInput.value = '';
@@ -189,6 +171,7 @@ const bindOpenTrigger = () => {
 };
 
 bindOpenTrigger();
+initScale(uploadForm);
 
 uploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -204,6 +187,7 @@ uploadForm.addEventListener('submit', (evt) => {
   sendData(formData)
     .then(() => {
       showMessage('#success');
+      pristine.reset();
       uploadForm.reset();
       closeUploadOverlay();
     })

@@ -14,8 +14,13 @@ const showError = (id) => {
 
 export const dataPictures = getData();
 
+const clearPictures = () => {
+  const oldPictures = picturesList.querySelectorAll('.picture');
+  oldPictures.forEach((element) => element.remove());
+};
+
 export const renderPictures = (pictures) => {
-  picturesList.innerHTML = '';
+  clearPictures();
 
   const fragment = document.createDocumentFragment();
 
