@@ -1,0 +1,9 @@
+export const SHOW_COMMETS_COUNT = 5;
+export const STEP = 5;
+export const MAX_HASHTAGS = 5;
+export const SCALE_STEP = 25;
+export const MIN_SCALE = 25;
+export const MAX_SCALE = 100;
+export const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+export const RANDOM_PICTURES_COUNT = 10;
+export const HASHTAG_VALIDATION = /^#[\p{L}\p{Nd}]{1,19}$/u;
