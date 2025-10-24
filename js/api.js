@@ -1,18 +1,20 @@
-export const getData = () => fetch('https://31.javascript.htmlacademy.pro/kekstagram/data').then((response) => {
-  if (response.ok) {
-    return response.json();
-  } else {
-    throw new Error('Ошибка загрузки данных');
-  }
-});
+const URL = 'https://31.javascript.htmlacademy.pro/kekstagram/';
 
-export const sendData = (formData) => fetch('https://31.javascript.htmlacademy.pro/kekstagram', {
-  method: 'POST',
-  body: formData,
-})
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error('Ошибка отправки данных');
-    }
-    return response;
+export const getData = async () => {
+  const response = await fetch(`${URL}data`);
+  if (!response.ok) {
+    throw new Error(`Ошибка загрузки: ${response.status}`);
+  }
+  return response.json();
+};
+
+export const sendData = async (data) => {
+  const response = await fetch(URL, {
+    method: 'POST',
+    body: data,
   });
+  if (!response.ok) {
+    throw new Error(`Ошибка отправки: ${response.status}`);
+  }
+  return response;
+};
