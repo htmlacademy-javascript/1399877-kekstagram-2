@@ -12,9 +12,9 @@ export const handleCloseClick = (evt) => {
   hidePictureModal();
 };
 
-export const handleOpenModalKeydown = ({target}) => {
+export const handleOpenModalKeydown = (evt) => {
   if (isEnterKey(evt)) {
-    showPictureModal(target);
+    showPictureModal(evt.target);
   }
 };
 
