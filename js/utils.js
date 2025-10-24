@@ -91,13 +91,13 @@ export const enableFocusTrap = (container, preferInitial = null, restoreTo = nul
 
   const prev = document.activeElement;
 
-  const onKeydown = (e) => {
-    if (e.key !== 'Tab') {
+  const onKeydown = (evt) => {
+    if (evt.key !== 'Tab') {
       return;
     }
 
     list = getFocusableElements(container);
-    trapFocus(e, list);
+    trapFocus(evt, list);
   };
 
   const onFocusIn = (e) => {
