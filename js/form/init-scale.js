@@ -6,7 +6,9 @@ export const initScale = (form) => {
   const valueField = form.querySelector('.scale__control--value');
   const preview = form.querySelector('.img-upload__preview img');
 
-  if (!smaller || !bigger || !valueField || !preview) return;
+  if (!smaller || !bigger || !valueField || !preview) {
+    return;
+  }
 
   smaller.addEventListener('click', () => {
     handleScaleUploadImage(true, false, valueField, preview);

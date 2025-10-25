@@ -13,7 +13,11 @@ export const renderPictureModal = (item, picturesData) => {
     commentShow = commentsCount;
   }
 
-  pictureModal.querySelector('img').src = image.src;
+  const bigImg = pictureModal.querySelector('.big-picture__img img');
+  const imgUrl = image.getAttribute('src');
+
+  bigImg.setAttribute('src', imgUrl);
+  bigImg.setAttribute('alt', descriptionPicture);
   pictureModal.querySelector('.likes-count').textContent = likes;
   pictureModal.querySelector('.social__comment-shown-count').textContent = commentShow;
   pictureModal.querySelector('.social__comment-total-count').textContent = commentsCount;

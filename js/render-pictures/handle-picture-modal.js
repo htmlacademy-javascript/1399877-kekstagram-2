@@ -3,8 +3,8 @@ import { pictureModal } from './render-picture-modal';
 import { closeButtonModal, showPictureModal, hidePictureModal } from '../picture-modal';
 import { isEnterKey, isEscapeKey } from '../utils';
 
-export const handleClickPicturesList = (evt) => {
-  showPictureModal(evt.target);
+export const handleClickPicturesList = ({target}) => {
+  showPictureModal(target);
 };
 
 export const handleCloseClick = (evt) => {
