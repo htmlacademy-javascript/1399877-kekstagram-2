@@ -97,7 +97,7 @@ export const enableFocusTrap = (container, preferInitial = null, restoreTo = nul
     }
 
     list = getFocusableElements(container);
-    trapFocus(e, list);
+    trapFocus(evt, list);
   };
 
   const onFocusIn = (e) => {
