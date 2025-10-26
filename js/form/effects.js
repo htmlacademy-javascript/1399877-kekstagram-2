@@ -81,7 +81,7 @@ const updateSlider = ()=>{
   }
 };
 
-const onSliderUpdate = () => {
+const handleSliderUpdate = () => {
   const raw = sliderElement.noUiSlider.get();
   const num = Number(raw);
   const normalized = String(num);
@@ -95,7 +95,7 @@ const onSliderUpdate = () => {
   effectLevelElement.value = normalized;
 };
 
-const onEffectsChange = ({target})=>{
+const handleEffectsChange = ({target})=>{
   if(!target.classList.contains('effects__radio')){
     return;
   }
@@ -108,7 +108,7 @@ const onEffectsChange = ({target})=>{
   }
 
   updateSlider();
-  onSliderUpdate();
+  handleSliderUpdate();
 };
 
 export const resetEffect = () => {
@@ -154,5 +154,5 @@ noUiSlider.create(sliderElement,{
 });
 hideSlider();
 
-effectsElement.addEventListener('change',onEffectsChange);
-sliderElement.noUiSlider.on('update', onSliderUpdate);
+effectsElement.addEventListener('change',handleEffectsChange);
+sliderElement.noUiSlider.on('update', handleSliderUpdate);

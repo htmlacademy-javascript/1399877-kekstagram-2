@@ -54,15 +54,11 @@ const enableFocusTrap = (container, preferInitial = null, restoreTo = null) => {
   };
 };
 
-const blockSubmitButton = () => {
-  submitButton.disabled = true;
-  submitButton.textContent = 'Публикую...';
+const toggleSubmitButton = (isBlocked) => {
+  submitButton.disabled = isBlocked;
+  submitButton.textContent = isBlocked ? 'Публикую...' : 'Опубликовать';
 };
 
-const unblockSubmitButton = () => {
-  submitButton.disabled = false;
-  submitButton.textContent = 'Опубликовать';
-};
 
 export const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -242,7 +238,7 @@ uploadForm.addEventListener('submit', async (evt) => {
   }
 
   const formData = new FormData(uploadForm);
-  blockSubmitButton();
+  toggleSubmitButton(true);
 
   try {
     await sendData(formData);
@@ -254,7 +250,7 @@ uploadForm.addEventListener('submit', async (evt) => {
   } catch (error) {
     showMessage('#error');
   } finally {
-    unblockSubmitButton();
+    toggleSubmitButton(false);
   }
 });
 
